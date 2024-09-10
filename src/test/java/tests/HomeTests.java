@@ -1,6 +1,6 @@
 package tests;
 
-import Manager.ApplicationManager;
+import manager.ApplicationManager;
 import org.testng.annotations.Test;
 import pages.HomePage;
 
