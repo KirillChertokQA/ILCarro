@@ -32,4 +32,8 @@ public class LoginPage extends BasePage{
         btnYallaSubmit.click();
         return new LoginPage(driver);
     }
+
+    public boolean isElementYallaPresent(){
+        return btnYallaSubmit.isDisplayed();
+}
 }
