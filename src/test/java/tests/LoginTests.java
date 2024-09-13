@@ -11,7 +11,8 @@ public class LoginTests extends ApplicationManager {
     public void LoginPositiveTest(){
         Assert.assertTrue(new HomePage(getDriver()).clickBtnLoginHeader()
                 .typeLoginForm("kirill@gmail.com", "Password123!")
-                .clickBtnLoginPositive().isElementYallaPresent());
+                .clickBtnLoginPositive()
+                .isTextInElementPresent_LoginSuccess());
 
 
     }

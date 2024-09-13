@@ -17,10 +17,17 @@ public class HomePage extends BasePage{
     @FindBy(xpath = "//a[text()='Log in']")
     WebElement btnLogin;
 
+    @FindBy(xpath = "//a[text()=' Sign up ']")
+    WebElement btnSignUp;
+
     public LoginPage clickBtnLoginHeader(){
         btnLogin.click();
         return new LoginPage(driver);
     }
 
 
+    public RegistrationPage clickBtnRegistration() {
+        btnSignUp.click();
+        return new RegistrationPage(driver);
+    }
 }
