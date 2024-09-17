@@ -1,10 +1,13 @@
 package pages;
 
+import dto.UserDto;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
+
+import static java.awt.SystemColor.text;
 
 public class LoginPage extends BasePage{
 
@@ -25,9 +28,18 @@ public class LoginPage extends BasePage{
     @FindBy(xpath = "//h2[@class='message']")
     WebElement textPopUp_LoginSuccess;
 
+    @FindBy(xpath = "//input[@id='email']/..//div[@class='error']/div")
+    WebElement errorMessageInputEmail;
+
     public LoginPage typeLoginForm(String email, String password){
         inputEmail.sendKeys(email);
         inputPassword.sendKeys(password);
+        return this;
+    }
+
+    public LoginPage typeLoginForm(UserDto user){
+        inputEmail.sendKeys(user.getEmail());
+        inputPassword.sendKeys(user.getPassword());
         return this;
     }
 
@@ -40,5 +52,10 @@ public class LoginPage extends BasePage{
     public boolean isTextInElementPresent_LoginSuccess(){
         return isTextInElementPresent(textPopUp_LoginSuccess, "Logged in success");
     }
+
+    public boolean isTextInElementPresent_ErrorEmail(String text){
+        return isTextInElementPresent(errorMessageInputEmail, text);
+    }
+
 
 }
