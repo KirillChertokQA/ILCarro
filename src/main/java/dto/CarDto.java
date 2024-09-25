@@ -17,7 +17,7 @@ public class CarDto {
     private String fuel;
     private int seats;
     private String carClass;
-    private Double pricePerDay;
+    private double pricePerDay;
     private String about;
     private String city;
 }
