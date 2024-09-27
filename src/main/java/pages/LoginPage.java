@@ -44,8 +44,9 @@ public class LoginPage extends BasePage{
     }
 
     public LoginPage clickBtnLoginPositive(){
-        pause(3);
-        btnYallaSubmit.click();
+//        pause(3);
+//        btnYallaSubmit.click();
+        clickWait(btnYallaSubmit,3);
         return this;
     }
 
