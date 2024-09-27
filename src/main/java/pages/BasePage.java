@@ -3,7 +3,11 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.HeaderMenuItem;
+
+import java.time.Duration;
 
 public class BasePage {
 
@@ -42,5 +46,15 @@ public class BasePage {
             default:
                 throw new IllegalArgumentException("invalid parameter headerMenuItem");
         }
+    }
+
+    public void clickWait(WebElement element, int time){
+        new WebDriverWait(driver, Duration.ofSeconds(time))
+                .until(ExpectedConditions.elementToBeClickable(element)).click();
+    }
+
+    public void clickWait(By locator, int time){
+        new WebDriverWait(driver, Duration.ofSeconds(time))
+                .until(ExpectedConditions.elementToBeClickable(locator)).click();
     }
 }

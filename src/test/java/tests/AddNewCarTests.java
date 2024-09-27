@@ -7,7 +7,10 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.LetTheCarWorkPage;
+import utils.Fuel;
 import utils.HeaderMenuItem;
+
+import java.util.Random;
 
 import static pages.BasePage.clickButtonsOnHeader;
 
@@ -30,16 +33,17 @@ public class AddNewCarTests extends ApplicationManager {
                 .manufacture("Toyota")
                 .model("Prius")
                 .year("2019")
-                .fuel("Hybrid")
+                .fuel(Fuel.DIESEL.getLocator())
                 .seats(5)
                 .carClass("C-class")
-                .serialNumber("1225")
+                .serialNumber("1225-"+new Random().nextInt(1000))
                 .pricePerDay(1000)
                 .about("text")
-                //.carPhotoPath("Prius.jpg")
+                .image("novi2.jpg")
                 .build();
        letTheCarWorkPage.typeAddNewCarForm(car);
-        Assert.assertTrue(letTheCarWorkPage.clickBtnSubmitPositive().isTextInElementPresent_AddSuccess());
+       letTheCarWorkPage.clickBtnSubmitPositive();
+        Assert.assertTrue(letTheCarWorkPage.isTextInElementPresent_AddSuccess(car.getManufacture()+" "+car.getModel()+" added successful"));
 
     }
 }

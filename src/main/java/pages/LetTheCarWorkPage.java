@@ -8,6 +8,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 
+import java.io.File;
+
 public class LetTheCarWorkPage extends BasePage {
 
     public LetTheCarWorkPage(WebDriver driver) {
@@ -35,25 +37,37 @@ public class LetTheCarWorkPage extends BasePage {
     WebElement inputPrice;
     @FindBy(id = "about")
     WebElement inputAbout;
-    @FindBy(xpath = "//button[text()='Submit']")
+    @FindBy(xpath = "//button[@type='submit']")
     WebElement clickBtnSubmit;
-    @FindBy(xpath = "//h1[text()='Car added']")
+    @FindBy(xpath = "div[@class='dialog-container']/h2")
     WebElement textPopUp_AddSuccess;
+
+    @FindBy(id = "photos")
+    WebElement inputPhoto;
 
     public void typeAddNewCarForm(CarDto car) {
         inputLocation.sendKeys(car.getCity());
-        pause(2);
-        driver.findElement(By.xpath("//div[@class='pac-item']")).click();
+//        pause(2);
+//        driver.findElement(By.xpath("//div[@class='pac-item']")).click();
+        clickWait(By.xpath("//div[@class='pac-item']"), 3);
         inputManufacture.sendKeys(car.getManufacture());
         inputModel.sendKeys(car.getModel());
         inputYear.sendKeys(car.getYear());
-        inputFuel.sendKeys(car.getFuel());
+        //------------------------
+        inputFuel.click();
+        clickWait(By.xpath(car.getFuel()),3);
+        //-----------------------------
+        //inputFuel.sendKeys(car.getFuel());
         //driver.findElement(By.xpath())
         inputSeats.sendKeys(String.valueOf(car.getSeats()));
         inputCarClass.sendKeys(car.getCarClass());
         inputSerialNumber.sendKeys(car.getSerialNumber());
-        inputPrice.sendKeys(String.valueOf(car.getPricePerDay()));
+        inputPrice.sendKeys(Double.toString(car.getPricePerDay()));
         inputAbout.sendKeys(car.getAbout());
+        //----------------------------
+        File file = new File("src/test/resources/"+car.getImage());
+        System.out.println(file.getAbsolutePath());
+        inputPhoto.sendKeys(file.getAbsolutePath());
 
     }
 
@@ -62,7 +76,7 @@ public class LetTheCarWorkPage extends BasePage {
         return this;
     }
 
-    public boolean isTextInElementPresent_AddSuccess() {
-        return isTextInElementPresent(textPopUp_AddSuccess, "Car added");
+    public boolean isTextInElementPresent_AddSuccess(String text) {
+        return isTextInElementPresent(textPopUp_AddSuccess, text);
     }
 }
