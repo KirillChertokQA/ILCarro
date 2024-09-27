@@ -39,7 +39,7 @@ public class LetTheCarWorkPage extends BasePage {
     WebElement inputAbout;
     @FindBy(xpath = "//button[@type='submit']")
     WebElement clickBtnSubmit;
-    @FindBy(xpath = "div[@class='dialog-container']/h2")
+    @FindBy(xpath = "//div[@class='dialog-container']/h2")
     WebElement textPopUp_AddSuccess;
 
     @FindBy(id = "photos")
@@ -72,7 +72,7 @@ public class LetTheCarWorkPage extends BasePage {
     }
 
     public LetTheCarWorkPage clickBtnSubmitPositive() {
-        clickBtnSubmit.click();
+        clickWait(clickBtnSubmit, 3);
         return this;
     }
 
