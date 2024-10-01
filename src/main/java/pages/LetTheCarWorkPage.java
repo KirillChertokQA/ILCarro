@@ -45,6 +45,9 @@ public class LetTheCarWorkPage extends BasePage {
     @FindBy(id = "photos")
     WebElement inputPhoto;
 
+    @FindBy(xpath = "//div[@class='dialog-container']/h1" )
+    WebElement textPopUp_AddFailed;
+
     public void typeAddNewCarForm(CarDto car) {
         inputLocation.sendKeys(car.getCity());
 //        pause(2);
@@ -78,5 +81,13 @@ public class LetTheCarWorkPage extends BasePage {
 
     public boolean isTextInElementPresent_AddSuccess(String text) {
         return isTextInElementPresent(textPopUp_AddSuccess, text);
+    }
+
+    public boolean clickBtnSubmitNegative() {
+        return clickBtnSubmit.isEnabled();
+    }
+
+    public boolean isTextInElementPresent_AddFailed(String text) {
+        return isTextInElementPresent(textPopUp_AddFailed, text);
     }
 }
