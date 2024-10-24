@@ -15,6 +15,8 @@ import java.lang.reflect.Method;
 public class ApplicationManager {
     private WebDriver driver;
 
+    public static int height;
+
     public Logger logger = LoggerFactory.getLogger(ApplicationManager.class);
 
     public WebDriver getDriver(){
@@ -28,6 +30,7 @@ public class ApplicationManager {
         WebDriverListener webDriverListener = new WDListener();
         driver = new EventFiringDecorator<>(webDriverListener).decorate(driver);
         driver.manage().window().maximize();
+        height = driver.manage().window().getSize().getHeight();
     }
 
     @AfterMethod

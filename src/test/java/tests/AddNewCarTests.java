@@ -10,12 +10,15 @@ import pages.HomePage;
 import pages.LetTheCarWorkPage;
 import utils.Fuel;
 import utils.HeaderMenuItem;
+import utils.RetryAnalyzer;
 import utils.TestNGListener;
 
 import java.lang.reflect.Method;
 import java.util.Random;
 
 import static pages.BasePage.clickButtonsOnHeader;
+
+import static utils.PropertiesReader.getProperty;
 
 @Listeners(TestNGListener.class)
 
@@ -27,12 +30,14 @@ public class AddNewCarTests extends ApplicationManager {
     @BeforeMethod
     public void startAddCar(){
         logger.info("start method --> startAddCar "+"user: "+"kirill@gmail.com");
-        new HomePage(getDriver()).clickBtnLoginHeader().typeLoginForm("kirill@gmail.com", "Password123!")
-                .clickBtnLoginPositive();
+//        new HomePage(getDriver()).clickBtnLoginHeader().typeLoginForm("kirill@gmail.com", "Password123!")
+//                .clickBtnLoginPositive();
+        new HomePage(getDriver()).clickBtnLoginHeader().typeLoginForm(getProperty("data.properties", "email"),
+                getProperty("data.properties", "password")).clickBtnLoginPositive();
         letTheCarWorkPage = clickButtonsOnHeader((HeaderMenuItem.LET_THE_CAR_WORK));
     }
 
-    @Test
+    @Test(retryAnalyzer = RetryAnalyzer.class)
     public void addNewCarPositiveTest(Method method){
         CarDto car = CarDto.builder()
                 .city("Tel Aviv")

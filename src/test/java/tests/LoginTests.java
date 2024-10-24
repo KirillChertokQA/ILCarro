@@ -10,6 +10,7 @@ import pages.LoginPage;
 import utils.HeaderMenuItem;
 import utils.TestNGListener;
 
+import static utils.PropertiesReader.getProperty;
 import static utils.RandomUtils.*;
 
 import static pages.BasePage.clickButtonsOnHeader;
@@ -21,7 +22,8 @@ public class LoginTests extends ApplicationManager {
     @Test
     public void LoginPositiveTest(){
         Assert.assertTrue(new HomePage(getDriver()).clickBtnLoginHeader()
-                .typeLoginForm("kirill@gmail.com", "Password123!")
+                .typeLoginForm(getProperty("data.properties", "email"),
+                        getProperty("data.properties", "password"))
                 .clickBtnLoginPositive()
                 .isTextInElementPresent_LoginSuccess());
 
